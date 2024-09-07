@@ -1,5 +1,3 @@
-// app/posts/[slug]/page.js
-
 import React from "react";
 import { notFound } from "next/navigation";
 import Container from "@/components/container";
@@ -10,6 +8,28 @@ import SectionSeparator from "@/components/section-separator";
 import { getPostAndMorePosts } from "@/lib/api";
 import Script from "next/script";
 import Head from "next/head";
+
+export async function generateMetadata({ params }) {
+  const { slug } = params;
+  const data = await getPostAndMorePosts(slug, false);
+  const post = data?.post;
+  return {
+    title: post?.title || "",
+    description: post?.excerpt || "",
+    openGraph: {
+      title: post?.title,
+      description: post?.excerpt || "",
+      images: [
+        {
+          url: post?.featuredImage?.url,
+          width: 800,
+          height: 600,
+          alt: post?.title,
+        },
+      ],
+    },
+  };
+}
 
 export default async function Post({ params }) {
   const { slug } = params;
@@ -66,19 +86,17 @@ export default async function Post({ params }) {
   return (
     <Layout preview={false}>
       <Container>
+        <Head>
+          <meta property="og:image" content={post.featuredImage?.node?.sourceUrl} />
+
+          {process.env.MGID_SITE_ID && (
+            <script src={`https://jsc.mgid.com/site/${process.env.MGID_SITE_ID}.js`} async></script>
+          )}
+          {process.env.ADSKEEPER_SITE_ID && (
+            <script src={`https://jsc.adskeeper.com/site/${process.env.ADSKEEPER_SITE_ID}.js`} async></script>
+          )}
+        </Head>
         <article>
-          <Head>
-            <title>{post.title}</title>
-            <meta property="og:image" content={post.featuredImage?.node?.sourceUrl} />
-
-            {process.env.MGID_SITE_ID && (
-              <script src={`https://jsc.mgid.com/site/${process.env.MGID_SITE_ID}.js`} async></script>
-            )}
-            {process.env.ADSKEEPER_SITE_ID && (
-              <script src={`https://jsc.adskeeper.com/site/${process.env.ADSKEEPER_SITE_ID}.js`} async></script>
-            )}
-          </Head>
-
           {mgidSiteId && (
             <Script
               src={`https://jsc.mgid.com/site/${mgidSiteId}.js`}
