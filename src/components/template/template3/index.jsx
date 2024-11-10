@@ -37,7 +37,7 @@ const Card = ({ data }) => {
             data-te-ripple-color="light"
           >
             {data?.slug && (
-              <Link
+              <a
                 href={`/${data?.slug}`}
                 aria-label={data?.title}
                 class="w-full"
@@ -48,28 +48,28 @@ const Card = ({ data }) => {
                   src={data?.featuredImage?.node.sourceUrl}
                   class="w-full"
                 />
-              </Link>
+              </a>
             )}
           </div>
         </div>
         <div class="p-6">
-          <Link href={`/${data?.slug}`}>
+          <a href={`/${data?.slug}`}>
             <h5 class="mb-3 text-2xl font-bold text-white">{data?.title}</h5>
-          </Link>
+          </a>
           <p class="mb-6 text-neutral-500 dark:text-neutral-300">
             <small>
               Published <u>{data?.date}</u>
             </small>
           </p>
 
-          <Link
+          <a
             href={`/${data?.slug}`}
             data-te-ripple-init
             data-te-ripple-color="dark"
             class="inline-block rounded-full bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
           >
             Read more
-          </Link>
+          </a>
         </div>
       </div>
     </div>

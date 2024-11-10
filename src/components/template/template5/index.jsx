@@ -34,7 +34,7 @@ const Card = ({ data }) => {
           data-te-ripple-color="light"
         >
           {data?.slug && (
-            <Link
+            <a
               href={`/${data?.slug}`}
               aria-label={data?.title}
               class="w-full"
@@ -45,15 +45,15 @@ const Card = ({ data }) => {
                 src={data?.featuredImage?.node.sourceUrl}
                 class="w-full"
               />
-            </Link>
+            </a>
           )}
         </div>
       </div>
 
       <div class="mb-6 mr-auto w-full shrink-0 grow-0 basis-auto px-3 md:mb-0 md:w-9/12 xl:w-7/12">
-        <Link href={`/${data?.slug}`}>
+        <a href={`/${data?.slug}`}>
           <h5 class="mb-3 text-lg font-bold">{data?.title}</h5>
-        </Link>
+        </a>
 
         <p class="mb-6 text-neutral-500 dark:text-neutral-500">
           <small>

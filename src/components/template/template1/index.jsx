@@ -81,9 +81,9 @@ const Card = ({ data }) => {
         }}
       >
         {data?.slug ? (
-          <Link href={`/${data?.slug}`} aria-label={data?.title}>
+          <a href={`/${data?.slug}`} aria-label={data?.title}>
             {image}
-          </Link>
+          </a>
         ) : (
           image
         )}
@@ -110,11 +110,11 @@ const Card = ({ data }) => {
             color: "#333333",
           }}
         >
-          <Link
+          <a
             href={`/${data?.slug}`}
             className="hover:underline"
             dangerouslySetInnerHTML={{ __html: data?.title }}
-          ></Link>
+          ></a>
         </div>
         <p
           class="pb-3 font-normal shadow-blue-500/50"

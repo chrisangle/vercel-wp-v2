@@ -57,10 +57,12 @@ export default async function Post({ params }) {
   const isShowAdsKeeperSideBar = ADSKEEPER_SIDEBAR_WIDGET_ID ? true : false;
 
   // Splitting content to insert ads
-  let content = post.content;
-  let paraArray = content.split("</p>");
+  let content = post?.content || "";
+
+  let paraArray = content.includes("<p>")? content.split("</p>"):"";
   let newContent = "";
-  paraArray.forEach((item, index) => {
+  
+  paraArray.length && paraArray.forEach((item, index) => {
     newContent += item;
     if (index === MGID_IN_ARTICLE_POSITION && MGID_IN_ARTICLE_WIDGET_ID) {
       newContent += `<div class="mgid-in_article">
@@ -88,25 +90,21 @@ export default async function Post({ params }) {
       <Container>
         <Head>
           <meta property="og:image" content={post.featuredImage?.node?.sourceUrl} />
-
-          {process.env.MGID_SITE_ID && (
-            <script src={`https://jsc.mgid.com/site/${process.env.MGID_SITE_ID}.js`} async></script>
-          )}
-          {process.env.ADSKEEPER_SITE_ID && (
-            <script src={`https://jsc.adskeeper.com/site/${process.env.ADSKEEPER_SITE_ID}.js`} async></script>
-          )}
         </Head>
         <article>
+          <Script src={`https://jsc.mgid.com/site/${process.env.MGID_SITE_ID}.js`}></Script>
           {mgidSiteId && (
             <Script
               src={`https://jsc.mgid.com/site/${mgidSiteId}.js`}
               strategy="lazyOnload"
+              // strategy="afterInteractive" // Load when the page is interactive
             />
           )}
           {adskeeperSiteId && (
             <Script
               src={`https://jsc.adskeeper.com/site/${adskeeperSiteId}.js`}
               strategy="lazyOnload"
+              // strategy="afterInteractive" // Load when the page is interactive
             />
           )}
 

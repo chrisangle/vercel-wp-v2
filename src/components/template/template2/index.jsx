@@ -38,7 +38,7 @@ const CardLeft = ({ data }) => {
           data-te-ripple-color="light"
         >
           {data?.slug && (
-            <Link
+            <a
               href={`/${data?.slug}`}
               aria-label={data?.title}
               class="w-full"
@@ -49,15 +49,15 @@ const CardLeft = ({ data }) => {
                 src={data?.featuredImage?.node.sourceUrl}
                 class="w-full"
               />
-            </Link>
+            </a>
           )}
         </div>
       </div>
 
       <div>
-        <Link href={`/${data?.slug}`}>
+        <a href={`/${data?.slug}`}>
           <h3 class="mb-3 text-2xl font-bold">{data?.title}</h3>
-        </Link>
+        </a>
         <p class="mb-6 text-neutral-500 dark:text-neutral-300">
           <small>
             Published <u>{data?.date}</u>
@@ -78,7 +78,7 @@ const CardRight = ({ data }) => {
           data-te-ripple-color="light"
         >
           {data?.slug && (
-            <Link
+            <a
               href={`/${data?.slug}`}
               aria-label={data?.title}
               class="w-full"
@@ -89,15 +89,15 @@ const CardRight = ({ data }) => {
                 src={data?.featuredImage?.node.sourceUrl}
                 class="w-full"
               />
-            </Link>
+            </a>
           )}
         </div>
       </div>
 
       <div class="md:order-1">
-        <Link href={`/${data?.slug}`}>
+        <a href={`/${data?.slug}`}>
           <h3 class="mb-3 text-2xl font-bold">{data?.title}</h3>
-        </Link>
+        </a>
 
         <p class="mb-6 text-neutral-500 dark:text-neutral-300">
           <small>
