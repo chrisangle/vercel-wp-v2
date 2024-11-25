@@ -90,6 +90,23 @@ export default async function Post({ params }) {
       <Container>
         <Head>
           <meta property="og:image" content={post.featuredImage?.node?.sourceUrl} />
+          {/* Global Site Tag (gtag.js) - Google Analytics */}
+          <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GA_ID}`}
+          />
+          <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${process?.env?.GA_ID}', {
+                    page_path: window.location.pathname,
+                  });
+                `,
+              }}
+          />
         </Head>
         <article>
           <Script src={`https://jsc.mgid.com/site/${process.env.MGID_SITE_ID}.js`}></Script>
@@ -107,6 +124,8 @@ export default async function Post({ params }) {
               // strategy="afterInteractive" // Load when the page is interactive
             />
           )}
+
+
 
           <Script id="custom_mgid_script" strategy="beforeInteractive">
             {`(function(w,q){w[q] = w[q] || [];w[q].push(["_mgc.load"])})(window,"_mgq");`}
