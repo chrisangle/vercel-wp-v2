@@ -109,6 +109,27 @@ export default async function Post({ params }) {
           />
         </Head>
         <article>
+          {process.env.GA_ID && (
+              <Script
+                  strategy="lazyOnload"
+                  src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GA_ID}`}
+              />
+          )}
+          {process.env.GA_ID && (
+              <Script
+                  id={"block_ga_id"}
+                  dangerouslySetInnerHTML={{
+                    __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${process?.env?.GA_ID}', {
+                    page_path: window.location.pathname,
+                  });
+                `,
+                  }}
+              />
+          )}
           <Script src={`https://jsc.mgid.com/site/${process.env.MGID_SITE_ID}.js`}></Script>
           {mgidSiteId && (
             <Script

@@ -20,23 +20,23 @@ export default async function Home() {
   const mgidSiteId = process?.env?.MGID_SITE_ID;
   const adskeeperSiteId = process?.env?.ADSKEEPER_SITE_ID;
   return (
-    <Layout>
-      <Head>
-        <title>{process?.env?.CMS_NAME}</title>
-        {mgidSiteId && (
-          <script src={`https://jsc.mgid.com/site/${mgidSiteId}.js`} async />
-        )}
-        {adskeeperSiteId && (
-          <script src={`https://jsc.adskeeper.com/site/${adskeeperSiteId}.js`} async />
-        )}
-          {/* Global Site Tag (gtag.js) - Google Analytics */}
-          <script
-              async
-              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GA_ID}`}
-          />
-          <script
-              dangerouslySetInnerHTML={{
-                  __html: `
+      <Layout>
+          <Head>
+              <title>{process?.env?.CMS_NAME}</title>
+              {mgidSiteId && (
+                  <script src={`https://jsc.mgid.com/site/${mgidSiteId}.js`} async/>
+              )}
+              {adskeeperSiteId && (
+                  <script src={`https://jsc.adskeeper.com/site/${adskeeperSiteId}.js`} async/>
+              )}
+              {/* Global Site Tag (gtag.js) - Google Analytics */}
+              <script
+                  async
+                  src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GA_ID}`}
+              />
+              <script
+                  dangerouslySetInnerHTML={{
+                      __html: `
                   window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
@@ -44,27 +44,50 @@ export default async function Home() {
                     page_path: window.location.pathname,
                   });
                 `,
-              }}
-          />
-      </Head>
-      {mgidSiteId && (
-        <Script
-          src={`https://jsc.mgid.com/site/${mgidSiteId}.js`}
-          strategy="lazyOnload"
-        />
-      )}
-      {adskeeperSiteId && (
-        <Script
-          src={`https://jsc.adskeeper.com/site/${adskeeperSiteId}.js`}
-          strategy="lazyOnload"
-        />
-      )}
-      <Template edges={edges} />
-    </Layout>
+                  }}
+              />
+          </Head>
+          {mgidSiteId && (
+              <Script
+                  src={`https://jsc.mgid.com/site/${mgidSiteId}.js`}
+                  strategy="lazyOnload"
+              />
+          )}
+          {adskeeperSiteId && (
+              <Script
+                  src={`https://jsc.adskeeper.com/site/${adskeeperSiteId}.js`}
+                  strategy="lazyOnload"
+              />
+          )}
+
+          {process.env.GA_ID && (
+              <Script
+                  strategy="lazyOnload"
+                  src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GA_ID}`}
+              />
+          )}
+          {process.env.GA_ID && (
+              <Script
+                  id={"block_ga_id"}
+                  dangerouslySetInnerHTML={{
+                      __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${process?.env?.GA_ID}', {
+                    page_path: window.location.pathname,
+                  });
+                `,
+                  }}
+              />
+          )}
+
+          <Template edges={edges}/>
+      </Layout>
   );
 }
 
 export async function getData() {
-  const allPosts = await getAllPostsForHome(false); // Adjust preview flag if needed
-  return { allPosts };
+    const allPosts = await getAllPostsForHome(false); // Adjust preview flag if needed
+    return {allPosts};
 }
