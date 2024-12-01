@@ -152,7 +152,7 @@ export default async function Post({ params }) {
             {`(function(w,q){w[q] = w[q] || [];w[q].push(["_mgc.load"])})(window,"_mgq");`}
           </Script>
                   
-          <div className="block-columns" style="display:flex;">
+          <div className="block-columns" style={{display:'flex'}}>
             <div
               className="block-column"
               style={{
