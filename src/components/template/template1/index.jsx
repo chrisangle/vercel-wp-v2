@@ -14,8 +14,8 @@ const Template = ({ edges }) => {
     <div className="container mx-auto px-5">
       <Intro />
 
-      <section style={{}}>
-        <div class="inline-grid grid-cols-2 gap-4 w-full">
+      <section>
+        <div class="hidden md:inline-grid grid-cols-2 gap-4 w-full">
           <div class="h-full">
             <Card data={heroPost} />
           </div>
@@ -28,6 +28,18 @@ const Template = ({ edges }) => {
               );
             })}
           </div>
+        </div>
+        <div class="inline-grid md:hidden grid-cols-1 gap-4 w-full">
+          <div class="h-60">
+            <Card data={heroPost} />
+          </div>
+          {headerPosts.map(({ node }) => {
+                return (
+                  <div key={`${JSON.stringify(node)}`} class="h-60">
+                    <Card data={node} />
+                  </div>
+                );
+              })}
         </div>
       </section>
 

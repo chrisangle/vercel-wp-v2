@@ -16,6 +16,8 @@ export default async function Home() {
   const { edges } = allPosts || {};
   const listTemplate = [Template0, Template1, Template2, Template3, Template4, Template5];
   const Template = listTemplate[process?.env?.TEMPLATE || 0];
+//   const Template = listTemplate[5];
+  
 
   const mgidSiteId = process?.env?.MGID_SITE_ID;
   const adskeeperSiteId = process?.env?.ADSKEEPER_SITE_ID;
