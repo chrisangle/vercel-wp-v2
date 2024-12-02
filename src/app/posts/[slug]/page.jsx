@@ -146,13 +146,11 @@ export default async function Post({ params }) {
             />
           )}
 
-
-
           <Script id="custom_mgid_script" strategy="beforeInteractive">
             {`(function(w,q){w[q] = w[q] || [];w[q].push(["_mgc.load"])})(window,"_mgq");`}
           </Script>
                   
-          <div className="block-columns" style={{display:'flex'}}>
+          <div className="block-columns block md:flex md:w-full">
             <div
               className="block-column"
               style={{
